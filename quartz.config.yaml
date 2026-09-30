@@ -242,9 +242,16 @@ plugins:
       position: afterBody
       priority: 10
   - source: "@quartz-community/footer"
-    enabled: true
+    enabled: false
     options:
       links: {}
+    layout:
+      position: footer
+      priority: 50
+  - source: ./plugins/toa-footer
+    enabled: true
+    options:
+      links: {}   # ToA: Patrick decides the footer links; a Discord invite on a public site lets anyone join
     layout:
       position: footer
       priority: 50

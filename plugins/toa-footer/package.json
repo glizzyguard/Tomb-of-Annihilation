@@ -1,0 +1,36 @@
+{
+  "name": "toa-footer",
+  "version": "0.1.0",
+  "description": "Tomb of the Nine Gods wiki footer: the Wizards of the Coast Fan Content notice on every page, plus optional links.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./components": "./components.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node -e \"process.exit(0)\""
+  },
+  "quartz": {
+    "name": "toa-footer",
+    "displayName": "ToA Footer",
+    "category": "component",
+    "version": "0.1.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 50,
+    "defaultEnabled": true,
+    "defaultOptions": {
+      "links": {}
+    },
+    "components": {
+      "Footer": {
+        "displayName": "ToA Footer",
+        "defaultPosition": "footer",
+        "defaultPriority": 50
+      }
+    }
+  }
+}
