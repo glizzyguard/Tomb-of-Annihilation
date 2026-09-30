@@ -151,7 +151,7 @@ plugins:
       unlistWhenEncrypted: false
       outputPath: static/encryptedContentIndex.json
   - source: "@quartz-community/stacked-pages"
-    enabled: false
+    enabled: true   # ToA: on trial; Patrick judges it against the ITS layout and the right-floating infobox
     layout:
       position: afterBody
       priority: 50
