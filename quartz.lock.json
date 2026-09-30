@@ -12,6 +12,12 @@
       "resolved": "C:\\Users\\patri\\ToA-wiki\\plugins\\toa-wiki",
       "commit": "local",
       "installedAt": "2026-09-30T03:53:30.783Z"
+    },
+    "toa-footer": {
+      "source": "./plugins/toa-footer",
+      "resolved": "C:\\Users\\patri\\ToA-wiki\\plugins\\toa-footer",
+      "commit": "local",
+      "installedAt": "2026-09-30T22:26:39.867Z"
     }
   }
 }
