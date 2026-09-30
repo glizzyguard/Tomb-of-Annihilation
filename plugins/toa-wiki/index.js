@@ -336,7 +336,7 @@ export default function ToaWiki(userOpts) {
         () => (tree, file) => {
           const fm = file.data.frontmatter || {}
           // created-modified-date coerces a missing date to `new Date()`, so an undated page would show the build time.
-          if (opts.dateFromFrontmatterOnly && fm.published === undefined && fm.publishDate === undefined && fm.date === undefined) delete file.data.dates
+          if (opts.dateFromFrontmatterOnly && !fm.published && !fm.publishDate && !fm.date) delete file.data.dates
           if (!opts.infobox) return
           const idx = buildIndex(contentDirOf(ctx))
           const fileName = file.data.filePath ? path.basename(String(file.data.filePath), ".md") : ""
