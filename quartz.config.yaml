@@ -137,7 +137,7 @@ plugins:
     options: {}
     order: 45
   - source: "@quartz-community/encrypted-pages"
-    enabled: true
+    enabled: false
     options:
       iterations: 600000
       passwordField: password
