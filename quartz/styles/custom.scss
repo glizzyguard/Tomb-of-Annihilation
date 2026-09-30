@@ -7,3 +7,33 @@
 article h3#references {
   display: none;
 }
+
+// ToA wiki: two extra callouts. [!handout] reads as parchment for in-world documents; [!secret] is dark red for
+// content that is meant to be revealed. Both are readable in the public source, so nothing secret goes in either.
+.callout {
+  &[data-callout="handout"] {
+    --color: #6b4f1d;
+    --border: #c9a86a;
+    --bg: #f6ecd4;
+    --callout-icon: var(--callout-icon-abstract);
+    font-family: var(--bodyFont);
+  }
+  &[data-callout="secret"] {
+    --color: #8b1a1a;
+    --border: #8b1a1a66;
+    --bg: #8b1a1a14;
+    --callout-icon: var(--callout-icon-warning);
+  }
+}
+:root[saved-theme="dark"] .callout {
+  &[data-callout="handout"] {
+    --color: #e6cf9a;
+    --border: #8a6d3b;
+    --bg: #3a2f1c;
+  }
+  &[data-callout="secret"] {
+    --color: #e08a8a;
+    --border: #b03a3a88;
+    --bg: #5a1f1f33;
+  }
+}
