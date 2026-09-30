@@ -1,0 +1,33 @@
+{
+  "name": "toa-wiki",
+  "version": "0.1.0",
+  "description": "Tomb of the Nine Gods wiki build hooks: infobox from frontmatter, session-log cleanup, ledger asides as Behind the screen callouts, companion link remap.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node -e \"process.exit(0)\""
+  },
+  "quartz": {
+    "name": "toa-wiki",
+    "displayName": "ToA Wiki",
+    "category": "transformer",
+    "version": "0.1.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 25,
+    "defaultEnabled": true,
+    "defaultOptions": {
+      "infobox": true,
+      "dropSections": ["Encounter Prep", "Open Questions", "To-Do"],
+      "dropCodeLangs": ["dataview", "dataviewjs"],
+      "ledgerAsides": "callout",
+      "calloutTitle": "Behind the screen",
+      "companionRemap": true
+    }
+  }
+}
