@@ -99,6 +99,7 @@ plugins:
     enabled: true
     options:
       markdownLinkResolution: shortest
+      disableBrokenWikilinks: true
     order: 60
   - source: "@quartz-community/description"
     enabled: true
