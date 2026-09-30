@@ -18,8 +18,8 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
+      header: Cinzel          # ToA: also used for the generated link-preview images
+      body: EB Garamond
       code: IBM Plex Mono
     colors:
       lightMode:
@@ -125,6 +125,10 @@ plugins:
     order: 92
   - source: "@quartz-community/quartz-fonts"
     enabled: true
+    options:
+      header: Cinzel          # ToA: overrides the ITS theme fonts; fontOrigin googleFonts because "local" loads nothing
+      body: EB Garamond
+      fontOrigin: googleFonts
   - source: "@quartz-themes/core"
     enabled: true
     options:
