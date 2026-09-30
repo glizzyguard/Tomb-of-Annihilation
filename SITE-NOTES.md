@@ -1,4 +1,4 @@
-# Site notes: Tomb of the Nine Gods wiki
+# Site notes: Architects of Balance wiki
 
 How the Quartz build is put together, what each local piece does, and what is still open. Updated 2026-09-30 after the Quartz Build Brief v4.1 pass.
 

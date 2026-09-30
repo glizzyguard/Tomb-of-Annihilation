@@ -1,7 +1,7 @@
 {
   "name": "toa-wiki",
   "version": "0.1.0",
-  "description": "Tomb of the Nine Gods wiki build hooks: infobox from frontmatter, session-log cleanup, ledger asides as Behind the screen callouts, companion link remap.",
+  "description": "Architects of Balance wiki build hooks: infobox from frontmatter, session-log cleanup, ledger asides as Behind the screen callouts, companion link remap.",
   "type": "module",
   "license": "MIT",
   "main": "./index.js",

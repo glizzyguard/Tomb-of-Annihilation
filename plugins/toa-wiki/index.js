@@ -1,4 +1,4 @@
-// toa-wiki: Quartz 5 transformer for the Tomb of the Nine Gods player wiki.
+// toa-wiki: Quartz 5 transformer for the Architects of Balance player wiki (the Tomb of Annihilation campaign).
 // Four jobs, all switchable from quartz.config.yaml:
 //   1. companionRemap  - [[Withheld Note]] links become links to its " (Wiki)" companion
 //   2. dropSections    - session-log headings such as Encounter Prep / Open Questions go, with their bodies

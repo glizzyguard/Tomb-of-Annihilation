@@ -1,7 +1,7 @@
 {
   "name": "toa-footer",
   "version": "0.1.0",
-  "description": "Tomb of the Nine Gods wiki footer: the Wizards of the Coast Fan Content notice on every page, plus optional links.",
+  "description": "Architects of Balance wiki footer: the Wizards of the Coast Fan Content notice on every page, plus optional links.",
   "type": "module",
   "license": "MIT",
   "main": "./index.js",

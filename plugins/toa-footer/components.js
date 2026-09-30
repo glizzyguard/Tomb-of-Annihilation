@@ -2,7 +2,7 @@ import { h } from "preact"
 
 // Required wording; the site name may be adjusted if the site title changes.
 const NOTICE =
-  "Tomb of the Nine Gods is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC."
+  "Architects of Balance is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC."
 
 const CSS = `
 footer {
