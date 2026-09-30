@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "plugins": {
+    "quartz-leaflet-bases-plugin": {
+      "source": "github:Requiae/quartz-leaflet-bases-plugin",
+      "resolved": "https://github.com/Requiae/quartz-leaflet-bases-plugin.git",
+      "commit": "48da13cf01ba6d742e616da2e837fd2a9478ac79",
+      "installedAt": "2026-09-30T03:32:44.043Z"
+    },
+    "toa-wiki": {
+      "source": "./plugins/toa-wiki",
+      "resolved": "C:\\Users\\patri\\ToA-wiki\\plugins\\toa-wiki",
+      "commit": "local",
+      "installedAt": "2026-09-30T03:53:30.783Z"
+    }
+  }
+}

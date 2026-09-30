@@ -12,3 +12,7 @@ replit.nix
 .quartz/
 quartz/cli/tui/dist/
 .turbo/
+
+# ToA local guard (2026-09-29): the content folder is a full vault copy until Quartz Syncer takes over; never commit it (Quartz honours .gitignore when globbing, so this cannot be ignored here; guard with care)
+public-preview/
+preview-build.log
