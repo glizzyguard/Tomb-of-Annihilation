@@ -1,0 +1,26 @@
+{
+  "name": "toa-atlas",
+  "version": "0.1.0",
+  "description": "Architects of Balance wiki: the campaign timeline and atlas as a bases view (toa-atlas). Stage 1 renders the timeline; the map, route and linking follow in later stages.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node -e \"process.exit(0)\""
+  },
+  "quartz": {
+    "name": "toa-atlas",
+    "displayName": "ToA Atlas",
+    "category": ["component"],
+    "version": "0.1.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 50,
+    "defaultEnabled": true,
+    "defaultOptions": {}
+  }
+}

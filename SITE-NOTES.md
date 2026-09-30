@@ -58,3 +58,9 @@ Each content folder has a prose-free `index.md` (`type: hub`, `publish: true`, `
 - Infobox image `src` attributes come out as `.././folder/file.webp` after crawl-links rebases them. Valid, cosmetic.
 - The folder `01_The Party` and the hub note `The Party` share a display name.
 - The vault's Character Cheat Sheet is `publish: false` in the file but `true` in the veto table; `apply.js --write` flips it every run until the two agree.
+
+## toa-atlas (local plugin, `plugins/toa-atlas`), added 2026-09-30
+
+A bases view, `type: toa-atlas`, registered the same way the Leaflet Bases plugin registers its map view. The vault note `Atlas.md` carries the base block (filter: `note.type` is session or location). The view gets every published session and location; sessions sort by `day_count` then `session_num` and show the in-world date, `description`, and links for each name in `locations` (wikilinks resolved against the published location notes; unresolved names render as plain text). Unpublished notes never appear because rows come from the published content index.
+
+Stages: 1 timeline (done). 2 map image, markers from `marker` frontmatter using the Leaflet Bases conventions (CRS.Simple, pixel coordinates from the bottom-left, `mapName`), route polyline through consecutive stops. 3 two-way highlighting between entries and markers. 4 full-screen home page via `cssclasses: [atlas]` on `index.md` and `.page:has(article.atlas)` CSS. Research and the per-session locations proposal: vault `DM Notes/Wiki_Atlas_Research.md`.

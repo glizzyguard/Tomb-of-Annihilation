@@ -299,6 +299,9 @@ plugins:
       position: beforeBody
       priority: 15
       display: all
+  - source: ./plugins/toa-atlas   # ToA: timeline and atlas bases view (see SITE-NOTES)
+    enabled: true
+    options: {}
   - source: github:Requiae/quartz-leaflet-bases-plugin
     enabled: true
     options:
