@@ -7,7 +7,6 @@ tags:
   - status/deceased
   - campaign/toa
 publish: true
-draft: false
 aliases:
   - Fang
 titles:
