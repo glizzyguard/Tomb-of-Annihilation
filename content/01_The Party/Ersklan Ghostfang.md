@@ -9,6 +9,7 @@ tags:
 publish: true
 aliases:
   - Fang
+pronounced: "URSK-lan GOHST-fang"
 titles:
   - The Rogue
 race: Human

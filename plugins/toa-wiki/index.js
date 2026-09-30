@@ -23,15 +23,16 @@ const TYPE_MAP = {
 }
 
 const KEYS = {
-  character: ["aliases", "titles", "race", "gender", "age", "class", "alignment", "player", "home", "location", "faction", "family", "patron", "status", "standing", "first_seen", "last_seen"],
-  location: ["aliases", "category", "region", "ruler", "population", "inhabitants", "status", "first_visited", "last_visited"],
-  item: ["aliases", "category", "rarity", "attunement", "creator", "owner", "former_owners", "status", "found"],
-  deity: ["aliases", "titles", "pantheon", "alignment", "domains", "symbol", "worshipers", "vessel", "host", "status", "first_seen", "last_seen"],
-  organization: ["aliases", "category", "leader", "headquarters", "members", "allies", "enemies", "status", "standing", "first_seen", "last_seen"],
+  character: ["pronounced", "aliases", "titles", "race", "gender", "age", "class", "alignment", "player", "home", "location", "faction", "family", "patron", "status", "standing", "first_seen", "last_seen"],
+  location: ["pronounced", "aliases", "category", "region", "ruler", "population", "inhabitants", "status", "first_visited", "last_visited"],
+  item: ["pronounced", "aliases", "category", "rarity", "attunement", "creator", "owner", "former_owners", "status", "found"],
+  deity: ["pronounced", "aliases", "titles", "pantheon", "alignment", "domains", "symbol", "worshipers", "vessel", "host", "status", "first_seen", "last_seen"],
+  organization: ["pronounced", "aliases", "category", "leader", "headquarters", "members", "allies", "enemies", "status", "standing", "first_seen", "last_seen"],
   session: ["session_num", "date", "game_date", "day_count", "time_in_tomb", "location", "present"],
 }
 
 const LABELS = {
+  pronounced: "Pronounced",
   aliases: "Also known as",
   first_seen: "First seen",
   last_seen: "Last seen",
