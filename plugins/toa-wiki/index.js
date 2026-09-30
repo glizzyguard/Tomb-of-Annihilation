@@ -5,6 +5,8 @@
 //   3. ledgerAsides    - *(DM ledger: ...)* asides become a [!info] Behind the screen callout, or are stripped
 //   4. infobox         - frontmatter renders as a right-floating infobox at the top of the article, per note type
 //   5. dateFromFrontmatterOnly - pages with no date/published field show no date (the date plugin would otherwise show the build time)
+//   6. portraits        - `portrait` and `gallery` frontmatter (wikilinks to image files in the content folder) render at the top of the
+//                        infobox with a click-to-swap gallery and a full-screen viewer; the portrait also becomes the page's socialImage
 import fs from "node:fs"
 import path from "node:path"
 import { parse as parseYaml } from "yaml"
@@ -55,7 +57,57 @@ const CSS = `
 .toa-infobox-note { display: block; font-size: 0.85em; color: var(--gray); margin-top: 0.15rem; }
 .toa-infobox-missing { color: var(--darkgray); }
 @media (max-width: 800px) { .toa-infobox { float: none; width: 100%; max-width: 100%; margin: 0 0 1rem 0; } }
+.toa-infobox-portrait { padding: 0.5rem 0.5rem 0; text-align: center; }
+.toa-infobox-portrait img { max-width: 100%; height: auto; border-radius: 4px; cursor: zoom-in; display: inline-block; margin: 0; }
+.toa-infobox-gallery { display: flex; flex-wrap: wrap; gap: 0.3rem; justify-content: center; padding: 0.4rem 0.5rem 0.5rem; }
+.toa-infobox-gallery img { width: 3rem; height: 3rem; object-fit: cover; border-radius: 3px; cursor: pointer; margin: 0; border: 2px solid transparent; opacity: 0.85; }
+.toa-infobox-gallery img:hover, .toa-infobox-gallery img.toa-current { border-color: var(--secondary); opacity: 1; }
+#toa-lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.9); display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+#toa-lightbox.toa-open { display: flex; }
+#toa-lightbox img { max-width: 96vw; max-height: 96vh; object-fit: contain; margin: 0; border-radius: 4px; }
 `
+
+const PORTRAIT_JS = `
+(function () {
+  if (window.__toaPortraits) return;
+  window.__toaPortraits = true;
+  function box() {
+    var b = document.getElementById("toa-lightbox");
+    if (b) return b;
+    b = document.createElement("div");
+    b.id = "toa-lightbox";
+    var img = document.createElement("img");
+    img.alt = "";
+    b.appendChild(img);
+    b.addEventListener("click", function () { b.classList.remove("toa-open"); });
+    document.body.appendChild(b);
+    return b;
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (!(t instanceof HTMLImageElement)) return;
+    if (t.matches(".toa-infobox-gallery img")) {
+      var main = t.closest(".toa-infobox").querySelector(".toa-infobox-portrait img");
+      if (main) { main.src = t.getAttribute("data-full") || t.src; main.alt = t.alt; }
+      t.parentElement.querySelectorAll("img").forEach(function (i) { i.classList.remove("toa-current"); });
+      t.classList.add("toa-current");
+      e.preventDefault();
+    } else if (t.matches(".toa-infobox-portrait img")) {
+      var b = box();
+      b.querySelector("img").src = t.getAttribute("data-full") || t.src;
+      b.querySelector("img").alt = t.alt;
+      b.classList.add("toa-open");
+      e.preventDefault();
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { var b = document.getElementById("toa-lightbox"); if (b) b.classList.remove("toa-open"); }
+  });
+})();
+`
+
+const IMAGE_EXT = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"])
+const IMAGE_WARN_BYTES = 500 * 1024
 
 const WIKILINK = /\[\[([^\]|#]+)(#[^\]|]*)?(?:\|([^\]]*))?\]\]/g
 
@@ -80,6 +132,7 @@ function walk(dir, out) {
     const full = path.join(dir, entry.name)
     if (entry.isDirectory()) walk(full, out)
     else if (entry.name.endsWith(".md")) out.push(full)
+    else if (IMAGE_EXT.has(path.extname(entry.name).toLowerCase())) out.push(full)
   }
 }
 
@@ -88,12 +141,52 @@ function stripLink(value) {
   return (m ? m[1] : String(value)).trim()
 }
 
+// Quartz's slug rule for asset paths (see @quartz-community/utils slugifyPath): per segment, whitespace to "-",
+// "&" to "-and-", "%" to "-percent", drop ?#<>:"|*, lowercase. The extension is kept for non-Markdown files.
+function slugifyAssetPath(rel) {
+  return rel
+    .split("/")
+    .map((seg) => seg.replace(/\s/g, "-").replace(/&/g, "-and-").replace(/%/g, "-percent").replace(/\?/g, "").replace(/#/g, "").replace(/[<>:"|*]/g, "").toLowerCase())
+    .join("/")
+}
+
+// Relative URL from the current page slug to an asset slug, the way Quartz links between pages.
+function relativeTo(pageSlug, assetSlug) {
+  const depth = String(pageSlug || "").split("/").length - 1
+  return (depth > 0 ? "../".repeat(depth) : "./") + assetSlug
+}
+
+// Accepts "[[Fang - portrait.webp]]", "[[Fang - portrait.webp|alt]]", "Fang - portrait.webp" or a folder path; returns
+// { rel, slug, alt } or null when no such image is in the content folder.
+function resolveImage(idx, raw) {
+  if (raw === undefined || raw === null || raw === "") return null
+  const s = String(raw).trim()
+  const m = /^\[\[([^\]|#]+)(?:\|([^\]]*))?\]\]$/.exec(s)
+  const target = (m ? m[1] : s).trim().replace(/^!/, "")
+  const base = path.posix.basename(target).toLowerCase()
+  const rel = idx.images.get(base)
+  if (!rel) return null
+  return { rel, slug: slugifyAssetPath(rel), alt: (m && m[2] ? m[2] : path.posix.basename(target, path.posix.extname(target))).trim() }
+}
+
 function buildIndex(contentDir) {
   if (indexCache.has(contentDir)) return indexCache.get(contentDir)
-  const idx = { names: new Set(), aliases: new Map(), companions: new Map() }
+  const idx = { names: new Set(), aliases: new Map(), companions: new Map(), images: new Map() }
   const files = []
   if (fs.existsSync(contentDir)) walk(contentDir, files)
   for (const file of files) {
+    const ext = path.extname(file).toLowerCase()
+    if (IMAGE_EXT.has(ext)) {
+      const rel = path.relative(contentDir, file).split(path.sep).join("/")
+      idx.images.set(path.basename(file).toLowerCase(), rel)
+      try {
+        const bytes = fs.statSync(file).size
+        const fine = [".webp", ".jpg", ".jpeg"].includes(ext)
+        if (bytes > IMAGE_WARN_BYTES || !fine)
+          console.log("toa-wiki: image " + rel + " is " + Math.round(bytes / 1024) + " KB" + (fine ? "" : " and not WebP/JPEG") + "; Patrick resizes or converts, nothing is changed automatically")
+      } catch {}
+      continue
+    }
     let text
     try {
       text = fs.readFileSync(file, "utf8").slice(0, 4000)
@@ -260,9 +353,29 @@ function labelFor(key, labels) {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-function buildInfobox(idx, fm, fileName, opts) {
+function buildInfobox(idx, fm, fileName, opts, pageSlug) {
   const kind = TYPE_MAP[String(fm.type || "").toLowerCase()]
   if (!kind) return null
+  const portrait = opts.portraits ? resolveImage(idx, fm.portrait) : null
+  const gallery = opts.portraits && Array.isArray(fm.gallery) ? fm.gallery.map((g) => resolveImage(idx, g)).filter(Boolean) : []
+  const media = []
+  if (portrait) {
+    const src = relativeTo(pageSlug, portrait.slug)
+    media.push(el("div", { className: ["toa-infobox-portrait"] }, [el("img", { src, alt: portrait.alt, "data-full": src, loading: "lazy" })]))
+    if (gallery.length) {
+      const thumbs = [portrait, ...gallery.filter((g) => g.rel !== portrait.rel)]
+      media.push(
+        el(
+          "div",
+          { className: ["toa-infobox-gallery"] },
+          thumbs.map((g, i) => {
+            const s = relativeTo(pageSlug, g.slug)
+            return el("img", { src: s, alt: g.alt, "data-full": s, loading: "lazy", className: i === 0 ? ["toa-current"] : [] })
+          }),
+        ),
+      )
+    }
+  }
   const keys = (opts.keys && opts.keys[kind]) || KEYS[kind]
   const labels = { ...LABELS, ...(opts.labels || {}) }
   const rows = []
@@ -273,12 +386,13 @@ function buildInfobox(idx, fm, fileName, opts) {
     if (key === "status" && fm.status_note) cell.children.push(el("span", { className: ["toa-infobox-note"] }, inlineNodes(idx, fm.status_note)))
     rows.push(el("tr", {}, [el("th", {}, [text(labelFor(key, labels))]), cell]))
   }
-  if (!rows.length) return null
+  if (!rows.length && !media.length) return null
   const title = fm.title ? String(fm.title) : fileName
   const kindLabel = kind === "session" ? "Session log" : kind.charAt(0).toUpperCase() + kind.slice(1)
   return el("aside", { className: ["toa-infobox", `toa-infobox-${kind}`] }, [
     el("div", { className: ["toa-infobox-title"] }, [text(title), el("span", { className: ["toa-infobox-kind"] }, [text(kindLabel)])]),
-    el("table", {}, [el("tbody", {}, rows)]),
+    ...media,
+    ...(rows.length ? [el("table", {}, [el("tbody", {}, rows)])] : []),
   ])
 }
 
@@ -294,6 +408,7 @@ export default function ToaWiki(userOpts) {
     companionRemap: true,
     dropLeadingH1: true,
     dateFromFrontmatterOnly: true,
+    portraits: true,
     ...(userOpts || {}),
   }
   const sectionPatterns = (opts.dropSections || []).map((s) => new RegExp(s, "i"))
@@ -337,16 +452,24 @@ export default function ToaWiki(userOpts) {
           const fm = file.data.frontmatter || {}
           // created-modified-date coerces a missing date to `new Date()`, so an undated page would show the build time.
           if (opts.dateFromFrontmatterOnly && !fm.published && !fm.publishDate && !fm.date) delete file.data.dates
-          if (!opts.infobox) return
           const idx = buildIndex(contentDirOf(ctx))
+          // Link previews: og-image wants a static path or a full URL, not a wikilink, so the portrait becomes one.
+          if (opts.portraits && !fm.socialImage && !fm.image && !fm.cover) {
+            const portrait = resolveImage(idx, fm.portrait)
+            const baseUrl = ctx.cfg && ctx.cfg.configuration ? ctx.cfg.configuration.baseUrl : ""
+            if (portrait && baseUrl) fm.socialImage = "https://" + String(baseUrl).replace(/\/$/, "") + "/" + portrait.slug
+          }
+          if (!opts.infobox) return
           const fileName = file.data.filePath ? path.basename(String(file.data.filePath), ".md") : ""
-          const box = buildInfobox(idx, fm, fileName, opts)
+          const box = buildInfobox(idx, fm, fileName, opts, file.data.slug)
           if (box) tree.children.unshift(box)
         },
       ]
     },
     externalResources() {
-      return { css: [{ content: CSS, inline: true }] }
+      const res = { css: [{ content: CSS, inline: true }] }
+      if (opts.portraits) res.js = [{ script: PORTRAIT_JS, loadTime: "afterDOMReady", contentType: "inline", spaPreserve: true }]
+      return res
     },
   }
 }

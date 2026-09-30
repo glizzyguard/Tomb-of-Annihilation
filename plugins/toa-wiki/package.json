@@ -35,7 +35,8 @@
       "ledgerAsides": "callout",
       "calloutTitle": "Behind the screen",
       "companionRemap": true,
-      "dateFromFrontmatterOnly": true
+      "dateFromFrontmatterOnly": true,
+      "portraits": true
     }
   }
 }
