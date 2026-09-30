@@ -23,11 +23,19 @@
     "defaultEnabled": true,
     "defaultOptions": {
       "infobox": true,
-      "dropSections": ["Encounter Prep", "Open Questions", "To-Do"],
-      "dropCodeLangs": ["dataview", "dataviewjs"],
+      "dropSections": [
+        "Encounter Prep",
+        "Open Questions",
+        "To-Do"
+      ],
+      "dropCodeLangs": [
+        "dataview",
+        "dataviewjs"
+      ],
       "ledgerAsides": "callout",
       "calloutTitle": "Behind the screen",
-      "companionRemap": true
+      "companionRemap": true,
+      "dateFromFrontmatterOnly": true
     }
   }
 }

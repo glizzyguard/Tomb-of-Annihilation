@@ -4,6 +4,7 @@
 //   2. dropSections    - session-log headings such as Encounter Prep / Open Questions go, with their bodies
 //   3. ledgerAsides    - *(DM ledger: ...)* asides become a [!info] Behind the screen callout, or are stripped
 //   4. infobox         - frontmatter renders as a right-floating infobox at the top of the article, per note type
+//   5. dateFromFrontmatterOnly - pages with no date/published field show no date (the date plugin would otherwise show the build time)
 import fs from "node:fs"
 import path from "node:path"
 import { parse as parseYaml } from "yaml"
@@ -292,6 +293,7 @@ export default function ToaWiki(userOpts) {
     calloutTitle: "Behind the screen",
     companionRemap: true,
     dropLeadingH1: true,
+    dateFromFrontmatterOnly: true,
     ...(userOpts || {}),
   }
   const sectionPatterns = (opts.dropSections || []).map((s) => new RegExp(s, "i"))
@@ -332,8 +334,10 @@ export default function ToaWiki(userOpts) {
     htmlPlugins(ctx) {
       return [
         () => (tree, file) => {
-          if (!opts.infobox) return
           const fm = file.data.frontmatter || {}
+          // created-modified-date coerces a missing date to `new Date()`, so an undated page would show the build time.
+          if (opts.dateFromFrontmatterOnly && fm.published === undefined && fm.publishDate === undefined && fm.date === undefined) delete file.data.dates
+          if (!opts.infobox) return
           const idx = buildIndex(contentDirOf(ctx))
           const fileName = file.data.filePath ? path.basename(String(file.data.filePath), ".md") : ""
           const box = buildInfobox(idx, fm, fileName, opts)

@@ -70,6 +70,7 @@ plugins:
       ledgerAsides: callout
       calloutTitle: Behind the screen
       companionRemap: true
+      dateFromFrontmatterOnly: true
   - source: "@quartz-community/obsidian-flavored-markdown"
     enabled: true
     options:
