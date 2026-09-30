@@ -1,3 +1,9 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// ToA wiki: the footnote definitions sit under "### References" and Quartz moves them into its own
+// Footnotes section, which leaves the heading empty. Hide it site-wide; that heading is only used for footnotes.
+article h3#references {
+  display: none;
+}
