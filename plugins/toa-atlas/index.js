@@ -25,7 +25,11 @@
 // its pins and draws that session's leg; clicking it holds the selection and moves the map there. Pointing at a pin
 // lights every session that stopped there; clicking it holds that, scrolls the timeline to the first of them and
 // opens a popup with the link to the place. With a map the timeline scrolls in its own panel so both stay in view.
-// Stage 4 is the home page.
+// Stage 4: the home page. `home: true` on the view turns the page it sits on into the atlas: the sidebars go (the
+// title, search and theme switch become a bar across the top), the map fills the window and the timeline runs down
+// its side; on a phone the map sits above the timeline panel and Quartz's own mobile bar stays. `browse` is the
+// target of a "Browse the wiki" button over the map (an anchor on the same page, or any link). The page's own
+// content follows below the atlas, so the footer notice stays on the page.
 import { h } from "preact"
 import { viewRegistry, transformLink } from "@quartz-community/bases-page"
 
@@ -47,6 +51,26 @@ const CSS = `
 .toa-atlas-linked .toa-atlas-map { height: min(560px, 55vh); }
 .toa-atlas-linked .toa-atlas-scroll { position: relative; max-height: 40vh; overflow-y: auto; padding-left: 0.5rem; }
 .toa-atlas-linked .toa-atlas-entry { cursor: pointer; border-radius: 4px; }
+.toa-atlas-stage { position: relative; }
+.toa-atlas-browse { position: absolute; top: 0.6rem; right: 0.6rem; z-index: 1100; padding: 0.3rem 0.7rem; border: 1px solid #1b1b1b; border-radius: 4px; background: rgba(250, 244, 228, 0.94) !important; color: #1b1b1b !important; font-family: var(--headerFont); font-size: 0.85rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); }
+.toa-atlas-browse:hover { background: #fff !important; }
+.toa-atlas-stage:has(.toa-atlas-map:not(.leaflet-container)) .toa-atlas-browse { position: static; display: inline-block; margin-bottom: 0.6rem; }
+.page:has(.toa-atlas-home) .right.sidebar { display: none; }
+.page:has(.toa-atlas-home) .page-header { display: none; }
+@media (min-width: 801px) {
+  .page:has(.toa-atlas-home) { max-width: none; margin: 0; }
+  .page:has(.toa-atlas-home) #quartz-body { display: block; padding: 0; }
+  .page:has(.toa-atlas-home) .left.sidebar { position: static; display: flex; flex-direction: row; align-items: center; gap: 1.2rem; width: auto; height: 3.6rem; padding: 0 1.2rem; box-sizing: border-box; }
+  .page:has(.toa-atlas-home) .left.sidebar .page-title { margin: 0; font-size: 1.3rem; white-space: nowrap; }
+  .page:has(.toa-atlas-home) .left.sidebar .explorer, .page:has(.toa-atlas-home) .left.sidebar .spacer { display: none; }
+  .page:has(.toa-atlas-home) .left.sidebar .flex-component { flex: 0 1 28rem; margin: 0; }
+  .page:has(.toa-atlas-home) .center { max-width: none; padding: 0 1.2rem; }
+  .page:has(.toa-atlas-home) .center article > *:not(:has(.toa-atlas-home)) { max-width: 60rem; }
+  .toa-atlas-home { margin: 0 0 1.5rem; }
+  .toa-atlas-home.toa-atlas-linked { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem); gap: 1rem; height: calc(100vh - 4.6rem); min-height: 28rem; }
+  .toa-atlas-home.toa-atlas-linked .toa-atlas-stage, .toa-atlas-home.toa-atlas-linked .toa-atlas-map { height: 100%; margin: 0; }
+  .toa-atlas-home.toa-atlas-linked .toa-atlas-scroll { max-height: none; height: 100%; box-sizing: border-box; }
+}
 .toa-atlas-entry.toa-atlas-hit { background: color-mix(in srgb, var(--secondary) 14%, transparent); }
 .toa-atlas-entry.toa-atlas-active { background: color-mix(in srgb, var(--tertiary) 18%, transparent); }
 .toa-atlas-pin svg { width: 100%; height: 100%; stroke: #1b1b1b; stroke-width: 1.5; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); }
@@ -414,7 +438,15 @@ const render = ({ entries, view, slug, allSlugs, linkResolution }) => {
     ? h("ol", { class: "toa-atlas-timeline" }, items)
     : h("p", { class: "toa-atlas-empty" }, "No published sessions yet.")
 
-  return h("div", { class: "toa-atlas" }, [map, h("div", { class: "toa-atlas-scroll" }, timeline)])
+  const home = view.home === true || str(view.home) === "true"
+  const browse = str(view.browse).trim()
+  const button = browse
+    ? h("a", { href: browse.startsWith("#") || /^[a-z]+:/i.test(browse) ? browse : link(browse), class: "toa-atlas-browse" }, "Browse the wiki")
+    : null
+  return h("div", { class: home ? "toa-atlas toa-atlas-home" : "toa-atlas" }, [
+    h("div", { class: "toa-atlas-stage" }, [button, map]),
+    h("div", { class: "toa-atlas-scroll" }, timeline),
+  ])
 }
 
 export const toaAtlasViewRegistration = {
