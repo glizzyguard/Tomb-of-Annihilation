@@ -1,9 +1,9 @@
 ---
 publish: true
 title: Architects of Balance
-created: 2026-09-30T23:12:34.420Z
-modified: 2026-09-30T23:12:44.634Z
-published: 2026-09-30T23:12:44.634Z
+created: 2026-10-02T02:21:10.245Z
+modified: 2026-10-02T02:21:10.245Z
+published: 2026-10-02T02:21:10.245Z
 tags:
   - type/hub
   - campaign/toa
@@ -11,6 +11,21 @@ type: hub
 ---
 
 # Architects of Balance
+
+```base
+filters:
+  or:
+    - note.type == "session"
+    - note.type == "location"
+    - note.type == "hub"
+views:
+  - type: toa-atlas
+    name: Atlas
+    image: z_images/Foundry/scenes/chult/chult-labeled.webp
+    mapName: chult
+    home: true
+    browse: "#the-party"
+```
 
 ## The Party
 
