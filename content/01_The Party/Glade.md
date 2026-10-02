@@ -6,8 +6,8 @@ aliases:
   - Glade of the Jungle
 description: Sorcerer of the Blackthorn Forest who shaped earth and bodies for the expedition, carried the Heartwell Vial into the Tomb, and stayed in Chult when it was over.
 created: 2026-08-27T21:37:27.230Z
-modified: 2026-10-02T04:16:05.182Z
-published: 2026-10-02T04:16:05.182Z
+modified: 2026-10-02T04:46:47.763Z
+published: 2026-10-02T04:46:47.763Z
 tags:
   - type/player
   - race/wood-elf
@@ -159,7 +159,7 @@ Glade did not return to the Blackthorn Forest. He set off in search of the next 
 
 ### Backstory
 
-_The following is Glade's backstory as written by Adam, his player, reproduced in full._
+_The following is Glade's backstory as written by Adam, his player, in full._
 
 > The forest whispers, and a child is born.
 >
@@ -193,7 +193,7 @@ _The following is Glade's backstory as written by Adam, his player, reproduced i
 
 ### References
 
-[^bs]: Glade's backstory, reproduced above under Backstory.
+[^bs]: Glade's backstory, above under Backstory.
 [^s1]: [[Session 1]]
 [^s4]: [[Session 4]]
 [^s5]: [[Session 5]]
