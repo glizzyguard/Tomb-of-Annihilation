@@ -5,6 +5,7 @@
 //     or:
 //       - note.type == "session"
 //       - note.type == "location"
+//       - note.type == "hub"
 //   views:
 //     - type: toa-atlas
 //       name: Atlas
@@ -14,7 +15,7 @@
 //
 // The view receives every published note matching the filter. Sessions become the timeline, in expedition order
 // (day_count, then session_num); each entry shows the in-world date, the hand-written description, and links to the
-// places in its `locations` list. Location notes carrying `marker` frontmatter (the Leaflet Bases convention:
+// places in its `locations` list. Location and hub notes carrying `marker` frontmatter (the Leaflet Bases convention:
 // `coordinates: "lat, lng"` in image pixels from the bottom-left, optional `mapName`, `colour`) become map markers,
 // and the route is the line through each session's marked stops in order. Without `image` the view is the timeline
 // alone. `mapName` on the view keeps markers meant for another map off this one; `height` is the map height in px.
@@ -175,14 +176,28 @@ function typeOf(e) {
   return str(e.properties && e.properties.type).toLowerCase()
 }
 
+// A place is a location note or a hub (Port Nyanzaru and its wards are hubs, and sessions stop at them).
+function isPlace(e) {
+  const t = typeOf(e)
+  return t === "location" || t === "hub"
+}
+// Hubs are named for sorting (00_Harbor_Ward), so a hub shows under its first alias when it has one.
+function placeName(e) {
+  const alias = typeOf(e) === "hub" ? listOf(e.properties.aliases)[0] : ""
+  return alias || e.title
+}
+
 function buildLocationIndex(entries) {
   const byName = new Map()
-  for (const e of entries) {
-    if (typeOf(e) !== "location") continue
-    const base = e.fileProperties && e.fileProperties.basename ? e.fileProperties.basename : e.title
-    byName.set(str(base).toLowerCase(), e)
-    if (e.title) byName.set(str(e.title).toLowerCase(), e)
-    for (const a of listOf(e.properties.aliases)) byName.set(a.toLowerCase(), e)
+  // hubs first, so a location note wins any name it shares with a hub
+  for (const type of ["hub", "location"]) {
+    for (const e of entries) {
+      if (typeOf(e) !== type) continue
+      const base = e.fileProperties && e.fileProperties.basename ? e.fileProperties.basename : e.title
+      byName.set(str(base).toLowerCase(), e)
+      if (e.title) byName.set(str(e.title).toLowerCase(), e)
+      for (const a of listOf(e.properties.aliases)) byName.set(a.toLowerCase(), e)
+    }
   }
   return byName
 }
@@ -191,7 +206,7 @@ function buildLocationIndex(entries) {
 function buildMarkerIndex(entries, mapName) {
   const bySlug = new Map()
   for (const e of entries) {
-    if (typeOf(e) !== "location") continue
+    if (!isPlace(e)) continue
     const raw = e.properties.marker
     const list = Array.isArray(raw) ? raw : raw && typeof raw === "object" ? [raw] : []
     for (const m of list) {
@@ -281,7 +296,7 @@ const render = ({ entries, view, slug, allSlugs, linkResolution }) => {
                 "data-coordinates": markers.get(e.slug).coordinates,
                 "data-colour": markers.get(e.slug).colour,
               },
-              e.title,
+              placeName(e),
             ),
           ),
       )
