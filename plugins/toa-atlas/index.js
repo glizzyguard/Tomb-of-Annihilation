@@ -16,9 +16,11 @@
 // The view receives every published note matching the filter. Sessions become the timeline, in expedition order
 // (day_count, then session_num); each entry shows the in-world date, the hand-written description, and links to the
 // places in its `locations` list. Location and hub notes carrying `marker` frontmatter (the Leaflet Bases convention:
-// `coordinates: "lat, lng"` in image pixels from the bottom-left, optional `mapName`, `colour`) become map markers,
+// `coordinates: "lat, lng"` in image pixels from the bottom-left, optional `mapName`, `colour`, `label`) become map markers,
 // and the route is the line through each session's marked stops in order. Without `image` the view is the timeline
-// alone. `mapName` on the view keeps markers meant for another map off this one; `height` is the map height in px.
+// alone. `mapName` on the view keeps markers meant for another map off this one; `height` is the map height in px;
+// `labels: true` keeps every pin's name on the map instead of showing it on hover; `label: true` on one marker does
+// the same for that pin alone.
 // Stage 1: timeline. Stage 2: map, markers, route. Stage 3 adds the two-way highlighting, stage 4 the home page.
 import { h } from "preact"
 import { viewRegistry, transformLink } from "@quartz-community/bases-page"
@@ -33,6 +35,8 @@ const CSS = `
 .toa-atlas-pin { background: none; border: 0; }
 .toa-atlas-pin a { display: block; width: 100%; height: 100%; }
 .toa-atlas-pin svg { width: 100%; height: 100%; stroke: #1b1b1b; stroke-width: 1.5; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); }
+.leaflet-tooltip.toa-atlas-label { padding: 0 0.3rem; background: rgba(250, 244, 228, 0.88); border: 0; border-radius: 3px; box-shadow: none; color: #1b1b1b; font-family: var(--headerFont); font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+.leaflet-tooltip.toa-atlas-label::before { display: none; }
 .toa-atlas-timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--lightgray); }
 .toa-atlas-entry { position: relative; margin: 0; padding: 0.35rem 0 0.35rem 1.1rem; }
 .toa-atlas-entry::before { content: ""; position: absolute; left: -0.42rem; top: 0.85rem; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--secondary); border: 2px solid var(--light); }
@@ -102,10 +106,11 @@ const SCRIPT = `
 
   function build(el) {
     var pins = Array.prototype.map.call(el.querySelectorAll("a.toa-atlas-marker"), function (a) {
-      return { name: a.textContent, href: a.getAttribute("href"), slug: a.dataset.slug, at: coords(a.dataset.coordinates), colour: a.dataset.colour }
+      return { name: a.textContent, href: a.getAttribute("href"), slug: a.dataset.slug, at: coords(a.dataset.coordinates), colour: a.dataset.colour, label: a.dataset.label === "true" }
     }).filter(function (p) { return p.at })
     var route = []
     try { route = JSON.parse(el.dataset.route || "[]") } catch (e) {}
+    var labelled = el.dataset.labels === "true"
 
     return imageSize(el.dataset.src).then(function (size) {
       el.replaceChildren()
@@ -127,7 +132,11 @@ const SCRIPT = `
           html: '<a href="' + esc(p.href) + '" class="internal" style="fill:' + esc(p.colour) + '">' + PIN + "</a>",
           iconSize: [22, 33], iconAnchor: [11, 33], tooltipAnchor: [12, -22],
         })
-        markers[p.slug] = L.marker(p.at, { icon: icon, title: p.name }).bindTooltip(p.name).addTo(map)
+        // a name stays on the map when the marker asks for it (label: true, for a place the sheet does not print)
+        // or when the view sets labels: true (a sheet with no printed names); otherwise it shows on hover
+        var keep = labelled || p.label
+        var tip = keep ? { permanent: true, direction: "right", className: "toa-atlas-label" } : {}
+        markers[p.slug] = L.marker(p.at, { icon: icon, title: keep ? "" : p.name }).bindTooltip(p.name, tip).addTo(map)
       })
       el.toaAtlas = { map: map, markers: markers }
       return map
@@ -213,7 +222,11 @@ function buildMarkerIndex(entries, mapName) {
       if (!m || typeof m !== "object" || !COORDS.test(str(m.coordinates))) continue
       const on = str(m.mapName).trim()
       if (mapName ? on && on !== mapName : on) continue
-      bySlug.set(e.slug, { coordinates: str(m.coordinates).trim(), colour: str(m.colour).trim() || DEFAULT_COLOUR })
+      bySlug.set(e.slug, {
+        coordinates: str(m.coordinates).trim(),
+        colour: str(m.colour).trim() || DEFAULT_COLOUR,
+        label: m.label === true || str(m.label) === "true",
+      })
       break
     }
   }
@@ -282,6 +295,7 @@ const render = ({ entries, view, slug, allSlugs, linkResolution }) => {
           class: "toa-atlas-map",
           "data-src": link(image),
           "data-route": JSON.stringify(route),
+          "data-labels": view.labels === true || str(view.labels) === "true" ? "true" : undefined,
           style: num(view.height) ? "height:" + num(view.height) + "px" : undefined,
         },
         entries
@@ -295,6 +309,7 @@ const render = ({ entries, view, slug, allSlugs, linkResolution }) => {
                 "data-slug": e.slug,
                 "data-coordinates": markers.get(e.slug).coordinates,
                 "data-colour": markers.get(e.slug).colour,
+                "data-label": markers.get(e.slug).label ? "true" : undefined,
               },
               placeName(e),
             ),
