@@ -21,7 +21,11 @@
 // alone. `mapName` on the view keeps markers meant for another map off this one; `height` is the map height in px;
 // `labels: true` keeps every pin's name on the map instead of showing it on hover; `label: true` on one marker does
 // the same for that pin alone.
-// Stage 1: timeline. Stage 2: map, markers, route. Stage 3 adds the two-way highlighting, stage 4 the home page.
+// Stage 1: timeline. Stage 2: map, markers, route. Stage 3: the two are linked. Pointing at a timeline entry lights
+// its pins and draws that session's leg; clicking it holds the selection and moves the map there. Pointing at a pin
+// lights every session that stopped there; clicking it holds that, scrolls the timeline to the first of them and
+// opens a popup with the link to the place. With a map the timeline scrolls in its own panel so both stay in view.
+// Stage 4 is the home page.
 import { h } from "preact"
 import { viewRegistry, transformLink } from "@quartz-community/bases-page"
 
@@ -33,7 +37,18 @@ const CSS = `
 .toa-atlas-map.leaflet-container img { margin: 0; border-radius: 0; max-width: none; }
 .toa-atlas-map.leaflet-container a { background: none; }
 .toa-atlas-pin { background: none; border: 0; }
-.toa-atlas-pin a { display: block; width: 100%; height: 100%; }
+.toa-atlas-pin span { display: block; width: 100%; height: 100%; cursor: pointer; }
+.toa-atlas-pin svg { transition: transform 0.12s ease; transform-origin: 50% 100%; }
+.toa-atlas-pin.toa-atlas-hot svg { transform: scale(1.4); stroke: #fff; }
+.toa-atlas-focus .toa-atlas-pin:not(.toa-atlas-hot) { opacity: 0.45; }
+.toa-atlas-map .leaflet-popup-content { margin: 0.5rem 0.8rem; color: #1b1b1b; font-size: 0.9rem; line-height: 1.35; }
+.toa-atlas-map .leaflet-popup-content a { color: #7a1f1f; font-family: var(--headerFont); font-weight: 600; white-space: nowrap; }
+.toa-atlas-map .leaflet-popup-content small { display: block; color: #555; }
+.toa-atlas-linked .toa-atlas-map { height: min(560px, 55vh); }
+.toa-atlas-linked .toa-atlas-scroll { position: relative; max-height: 40vh; overflow-y: auto; padding-left: 0.5rem; }
+.toa-atlas-linked .toa-atlas-entry { cursor: pointer; border-radius: 4px; }
+.toa-atlas-entry.toa-atlas-hit { background: color-mix(in srgb, var(--secondary) 14%, transparent); }
+.toa-atlas-entry.toa-atlas-active { background: color-mix(in srgb, var(--tertiary) 18%, transparent); }
 .toa-atlas-pin svg { width: 100%; height: 100%; stroke: #1b1b1b; stroke-width: 1.5; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); }
 .leaflet-tooltip.toa-atlas-label { padding: 0 0.3rem; background: rgba(250, 244, 228, 0.88); border: 0; border-radius: 3px; box-shadow: none; color: #1b1b1b; font-family: var(--headerFont); font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
 .leaflet-tooltip.toa-atlas-label::before { display: none; }
@@ -112,8 +127,13 @@ const SCRIPT = `
     try { route = JSON.parse(el.dataset.route || "[]") } catch (e) {}
     var labelled = el.dataset.labels === "true"
 
+    var root = el.closest(".toa-atlas")
+    var entries = root ? Array.prototype.slice.call(root.querySelectorAll("li.toa-atlas-entry")) : []
+    var panel = root ? root.querySelector(".toa-atlas-scroll") : null
+
     return imageSize(el.dataset.src).then(function (size) {
       el.replaceChildren()
+      if (root) root.classList.add("toa-atlas-linked")
       var bounds = [[0, 0], size]
       var map = L.map(el, { crs: L.CRS.Simple, maxBounds: bounds, maxBoundsViscosity: 0.8, minZoom: -6, maxZoom: 1, zoomSnap: 0.25, zoomDelta: 0.5, attributionControl: false })
       L.imageOverlay(el.dataset.src, bounds).addTo(map)
@@ -129,16 +149,89 @@ const SCRIPT = `
       pins.forEach(function (p) {
         var icon = L.divIcon({
           className: "toa-atlas-pin",
-          html: '<a href="' + esc(p.href) + '" class="internal" style="fill:' + esc(p.colour) + '">' + PIN + "</a>",
+          html: '<span style="fill:' + esc(p.colour) + '">' + PIN + "</span>",
           iconSize: [22, 33], iconAnchor: [11, 33], tooltipAnchor: [12, -22],
         })
         // a name stays on the map when the marker asks for it (label: true, for a place the sheet does not print)
         // or when the view sets labels: true (a sheet with no printed names); otherwise it shows on hover
         var keep = labelled || p.label
         var tip = keep ? { permanent: true, direction: "right", className: "toa-atlas-label" } : {}
-        markers[p.slug] = L.marker(p.at, { icon: icon, title: keep ? "" : p.name }).bindTooltip(p.name, tip).addTo(map)
+        markers[p.slug] = L.marker(p.at, { icon: icon, title: keep ? "" : p.name, alt: p.name }).bindTooltip(p.name, tip).addTo(map)
       })
-      el.toaAtlas = { map: map, markers: markers }
+
+      // Linking. "selected" is what a click holds; pointing shows something else for as long as the pointer stays.
+      var leg = L.polyline([], { color: "#f2c14e", weight: 4, opacity: 0.95, lineCap: "round", interactive: false }).addTo(map)
+      var selected = null
+      function stopsOf(entry) {
+        return (entry.dataset.stops || "").split(",").filter(function (s) { return markers[s] })
+      }
+      function sessionsAt(slug) {
+        return entries.filter(function (e) { return stopsOf(e).indexOf(slug) !== -1 })
+      }
+      function paint(slugs, hits, path) {
+        Object.keys(markers).forEach(function (s) {
+          var on = slugs.indexOf(s) !== -1
+          var node = markers[s].getElement()
+          if (node) node.classList.toggle("toa-atlas-hot", on)
+          markers[s].setZIndexOffset(on ? 1000 : 0)
+        })
+        el.classList.toggle("toa-atlas-focus", slugs.length > 0)
+        entries.forEach(function (e) { e.classList.toggle("toa-atlas-hit", hits.indexOf(e) !== -1) })
+        leg.setLatLngs(path)
+      }
+      function showEntry(entry) {
+        var s = stopsOf(entry)
+        paint(s, [], s.length > 1 ? s.map(function (x) { return markers[x].getLatLng() }) : [])
+      }
+      function showPlace(slug) {
+        paint([slug], sessionsAt(slug), [])
+      }
+      function restore() {
+        if (selected && selected.entry) showEntry(selected.entry)
+        else if (selected && selected.slug) showPlace(selected.slug)
+        else paint([], [], [])
+      }
+      function select(next) {
+        selected = next
+        entries.forEach(function (e) { e.classList.toggle("toa-atlas-active", !!(next && next.entry === e)) })
+        restore()
+      }
+
+      entries.forEach(function (entry) {
+        entry.addEventListener("mouseenter", function () { showEntry(entry) })
+        entry.addEventListener("mouseleave", restore)
+        entry.addEventListener("click", function (ev) {
+          if (ev.target.closest("a")) return
+          if (selected && selected.entry === entry) { select(null); return }
+          map.closePopup()
+          select({ entry: entry })
+          var s = stopsOf(entry)
+          if (s.length) {
+            var box = L.latLngBounds(s.map(function (x) { return markers[x].getLatLng() })).pad(0.4)
+            map.flyToBounds(box, { maxZoom: Math.max(map.getMinZoom(), -1.5), duration: 0.6 })
+          }
+        })
+      })
+      pins.forEach(function (p) {
+        var m = markers[p.slug]
+        var n = sessionsAt(p.slug).length
+        m.bindPopup(
+          '<a href="' + esc(p.href) + '" class="internal">' + esc(p.name) + "</a>" +
+            "<small>" + (n === 1 ? "1 session" : n + " sessions") + "</small>",
+          { offset: [0, -24], closeButton: false },
+        )
+        m.on("popupopen", function () { if (!m.getTooltip().options.permanent) m.closeTooltip() })
+        m.on("mouseover", function () { showPlace(p.slug) })
+        m.on("mouseout", restore)
+        m.on("click", function () {
+          select({ slug: p.slug })
+          var first = sessionsAt(p.slug)[0]
+          if (first && panel) panel.scrollTo({ top: first.offsetTop - 8, behavior: "smooth" })
+        })
+      })
+      map.on("click", function () { select(null) })
+
+      el.toaAtlas = { map: map, markers: markers, select: select }
       return map
     })
   }
@@ -321,7 +414,7 @@ const render = ({ entries, view, slug, allSlugs, linkResolution }) => {
     ? h("ol", { class: "toa-atlas-timeline" }, items)
     : h("p", { class: "toa-atlas-empty" }, "No published sessions yet.")
 
-  return h("div", { class: "toa-atlas" }, [map, timeline])
+  return h("div", { class: "toa-atlas" }, [map, h("div", { class: "toa-atlas-scroll" }, timeline)])
 }
 
 export const toaAtlasViewRegistration = {
