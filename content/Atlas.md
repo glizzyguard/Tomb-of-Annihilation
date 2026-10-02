@@ -1,9 +1,9 @@
 ---
 publish: true
 title: Atlas
-created: 2026-10-01T23:37:17.214Z
-modified: 2026-10-01T23:37:17.214Z
-published: 2026-10-01T23:37:17.214Z
+created: 2026-10-02T00:13:19.457Z
+modified: 2026-10-02T00:13:19.457Z
+published: 2026-10-02T00:13:19.457Z
 tags:
   - type/hub
   - campaign/toa
@@ -17,6 +17,7 @@ filters:
   or:
     - note.type == "session"
     - note.type == "location"
+    - file.name == "Atlas"
 views:
   - type: toa-atlas
     name: Atlas
