@@ -56,7 +56,7 @@ const CSS = `
 .toa-infobox td { padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--lightgray); border-top: 0; vertical-align: top; }
 .toa-infobox tr:last-child th, .toa-infobox tr:last-child td { border-bottom: 0; }
 .toa-infobox-note { display: block; font-size: 0.85em; color: var(--gray); margin-top: 0.15rem; }
-.toa-infobox-missing { color: var(--darkgray); }
+.toa-infobox-missing { color: var(--secondary); opacity: 0.5; }
 @media (max-width: 800px) { .toa-infobox { float: none; width: 100%; max-width: 100%; margin: 0 0 1rem 0; } }
 .toa-infobox-portrait { padding: 0.5rem 0.5rem 0; text-align: center; }
 .toa-infobox-portrait img { max-width: 100%; height: auto; border-radius: 4px; cursor: zoom-in; display: inline-block; margin: 0; }
