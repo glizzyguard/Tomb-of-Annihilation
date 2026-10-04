@@ -2,8 +2,8 @@
 publish: true
 description: Tabaxi druid and later priestess of Chakuna, who bound her soul to Alice, became her patron's avatar in the Cradle and founded a grove in the Western Heartlands.
 created: 2026-08-27T21:37:59.839Z
-modified: 2026-10-04T05:33:10.470Z
-published: 2026-10-04T05:33:10.470Z
+modified: 2026-10-04T23:45:39.722Z
+published: 2026-10-04T23:45:39.722Z
 tags:
   - type/player
   - race/tabaxi
@@ -17,7 +17,7 @@ background: Acolyte
 alignment: Chaotic Neutral
 location: Western Heartlands
 family:
-  - "[[Alice]] (wife)"
+  - "[[Alice|Alice (wife)]]"
 patron: "[[Chakuna]]"
 status: alive
 status_note: Married Alice and founded a druid grove in the Western Heartlands
@@ -131,7 +131,7 @@ On the twenty-fourth Alice led Taenae, Glade and Takhesis to a well, which Taena
 
 On the twenty-sixth, after Ricardo's visit, she flew to [[Critters, Creepers & Crawlers]] as a Quetzalcoatlus and told Alice that she wanted a serious relationship. Alice refused her, but gave her the whistle.[^s30][^s31] The next day, crossing the Gorge of Teeth, she answered the voice that asked whether her flight served Order or Chaos: Chaos, the hunt.[^s32] At the [[The Bastion|Sunken Temple]] she seemed drawn to a statue of a displacer beast, gathered plants from its garden,[^s32] and brought the scales to balance with a vow to Chakuna.[^s33] That night she dreamed that Alice told her to seek out [[Dungrunglung]], where a sickness was spreading among the Grungs, and woke holding the Amulet of the Primal Unbound.[^s35]
 
-On the twenty-ninth she and Alice were reconciled and dined at the Golden Serpent,[^s36][^s37] and the next day Taenae told the party what she had learned there: [[Jannalor Tezim]] had replaced Ifan Talro'a as a merchant prince.[^s38] Alice had been wounded while investigating the [[Begär|Beggar King]] and fell into a coma on the thirtieth.[^s36][^s38] Before the party set out that afternoon Taenae held a seance to commune with Chakuna.[^s39] She left the party at the [[Temple of Euphoria]], went to the [[Harbor Hospice]], and performed the soul-binding with the help of the Tortle druids of the Emerald Enclave. She stayed with Alice until the party returned.[^s40][^s41]
+On the twenty-ninth she and Alice were reconciled,[^s36] and the two of them dined alone at the Golden Serpent,[^s37] and the next day Taenae told the party what she had learned there: [[Jannalor Tezim]] had replaced Ifan Talro'a as a merchant prince.[^s38] Alice had been wounded while investigating the [[Begär|Beggar King]] and fell into a coma on the thirtieth.[^s36][^s38] Before the party set out that afternoon Taenae held a seance to commune with Chakuna.[^s39] She left the party at the [[Temple of Euphoria]], went to the [[Harbor Hospice]], and performed the soul-binding with the help of the Tortle druids of the Emerald Enclave. She stayed with Alice until the party returned.[^s40][^s41]
 
 On the second of Eleasis she and Glade cleared the temple's Refuse Pit as tyrannosaurs.[^s45] The next day she found her room at the Dead Fish ransacked and tracked an accomplice downstairs.[^s46] On the fourth she learned meditation to regain her composure, and learned that the Tortles [[Tull'poa]] and [[Ko’Mara]] were going into the jungle to fight the curse.[^s48] She suspected that the gladiators [[Drakar]] and [[Urzok]] were lovers.[^s48] She and Alice spent that night quietly together.[^s49]
 

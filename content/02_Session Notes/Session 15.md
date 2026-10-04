@@ -2,7 +2,7 @@
 publish: true
 description: In the Chamber of Echoes the party watches illusions of the fall of the Aldani while the Hungerer mocks them, then descends to the Flooded Library.
 created: 2024-12-22
-modified: 2026-10-04T22:12:21.897Z
+modified: 2026-10-04T23:39:37.895Z
 published: 2024-12-22
 tags:
   - session-note
@@ -52,11 +52,11 @@ The party moves deeper into the shrine and finds the Flooded Library, a sprawlin
 
 ### Present
 
-[[Taenae]] · [[Vogal]] · [[Takhesis Calva]] · [[Vonara]] · [[Glade]]. [[Lorsa Rygor]] was present as a companion.
+[[Taenae]] · [[Vogal]] · [[Takhesis Calva]] · [[Vonara]] · [[Glade]]. [[Lorsa Rygor]] and [[Wulf Rygor]] were present as companions.
 
 ### References
 
-People: [[Lorsa Rygor]] · [[The Hungerer]] · [[Ubtao]]
+People: [[Lorsa Rygor]] · [[Wulf Rygor]] · [[The Hungerer]] · [[Ubtao]]
 
 Places: [[Aldani Shrine]]
 

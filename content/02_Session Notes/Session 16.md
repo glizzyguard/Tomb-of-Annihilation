@@ -2,7 +2,7 @@
 publish: true
 description: The party jumps into the deep water of the Flooded Library, defeats a water elemental and a water weird, and enters the Hall of Regret.
 created: 2024-12-29
-modified: 2026-10-04T22:12:21.897Z
+modified: 2026-10-04T23:39:37.895Z
 published: 2024-12-29
 tags:
   - session-note
@@ -53,10 +53,10 @@ The oppression in the air becomes suffocating as the party prepares to face what
 
 ### Present
 
-[[Taenae]] · [[Vogal]] · [[Takhesis Calva]] · [[Vonara]] · [[Glade]]. [[Lorsa Rygor]] was present as a companion.
+[[Taenae]] · [[Vogal]] · [[Takhesis Calva]] · [[Vonara]] · [[Glade]]. [[Lorsa Rygor]] and [[Wulf Rygor]] were present as companions.
 
 ### References
 
-People: [[Lorsa Rygor]]
+People: [[Lorsa Rygor]] · [[Wulf Rygor]]
 
 Places: [[Aldani Shrine]]

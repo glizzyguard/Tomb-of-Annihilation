@@ -6,8 +6,8 @@ aliases:
   - Vonara Silvertongue
 description: Half-Elf bard who bound herself to Valindra Shadowmantle for her companions' lives, carried a jar out of the Tomb of the Nine Gods and settled in Port Nyanzaru.
 created: 2026-10-04T18:51:40.365Z
-modified: 2026-10-04T19:34:28.282Z
-published: 2026-10-04T19:34:28.282Z
+modified: 2026-10-04T23:45:39.724Z
+published: 2026-10-04T23:45:39.724Z
 tags:
   - type/player
   - race/half-elf
@@ -53,7 +53,7 @@ Asked in the Gorge of Teeth whether her flight served Order or Chaos, she answer
 
 ## Abilities
 
-Vonara was a bard and a performer.[^s21][^s72][^s88] She steadied Vogal in the arena with a commanding speech,[^s27] and played a tune for a troop of capuchin monkeys in Omu.[^s63] Spells she was recorded casting include _dispel magic_, _dimension door_, _wall of force_, _wall of thorns_ and _Yolande's regal presence_.[^s23][^s27][^s54][^s66][^s68][^s69][^s72][^s81][^s87] She healed the fallen.[^s75]
+Vonara was a bard and a performer.[^s21][^s72][^s88] She bolstered Vogal in the arena by inconspicuously working up the crowd,[^s27] and played a tune for a troop of capuchin monkeys in Omu.[^s63] Spells she was recorded casting include _dispel magic_, _dimension door_, _wall of force_, _wall of thorns_ and _Yolande's regal presence_.[^s23][^s27][^s54][^s66][^s68][^s69][^s72][^s81][^s87] She healed the fallen.[^s75]
 
 She scouted for the party, on foot and on her broom,[^s22][^s67][^s85] and picked locks.[^s85][^s87] She recognized the Yuan-ti origins of a deinonychus,[^s6] knew an hourglass in the Tomb for Dwarven work,[^s64] and read Infernal.[^s87] On arriving in Valachan she tried to commune with the plants, which only echoed the malice of the monkeys there.[^s9]
 
@@ -78,7 +78,7 @@ She scouted for the party, on foot and on her broom,[^s22][^s67][^s85] and picke
 
 ## Relationships
 
-[[Kaelar Veilthorn]] was her husband. He was a brother of [[Taban Veilthorn]], and flirted with her openly at their first meeting in [[The Golden Serpent]].[^s21] At the gala he introduced himself and spent the rest of the evening getting to know her.[^s24] Valindra threatened him, by scrying, to force Vonara's cooperation.[^s59] The party saw him in the tapestry of the [[Sewn Sisters]] before the descent to the Cradle,[^s88] and when the survivors reached the camp above the caldera Vonara went to him.[^s91]
+[[Kaelar Veilthorn]] was her husband. He was a brother of [[Taban Veilthorn]], and flirted with her openly at their first meeting in [[The Golden Serpent]].[^s21] At the gala he reintroduced himself and spent the rest of the evening getting to know her.[^s24] Valindra threatened him, by scrying, to force Vonara's cooperation.[^s59] The party saw him in the tapestry of the [[Sewn Sisters]] before the descent to the Cradle,[^s88] and when the survivors reached the camp above the caldera Vonara went to him.[^s91]
 
 Sylvia and Vostra were her parents. They were murdered by Red Wizards,[^s35][^s41] and were raised as mindless undead puppets in Valindra's service.[^s58][^s59]
 
@@ -130,7 +130,7 @@ On the evening of the twenty-first of Flamerule, at the Dead Fish, Vogal noticed
 
 On the same date she flew over [[Wakanga's Villa]] on her broom and noted heavy traffic of servants, then landed to speak with a nobleman, Lord Cedric Montclair, who called himself the "12th Richest Man in Port Nyanzaru" and sneered at her for having no invitation to the coming gala. Couriers found each member of the party with an invitation shortly afterward.[^s22]
 
-At the gala of the twenty-third Montclair intercepted her and mocked her presence and her dress. [[Ekene-Afa]] then touched his goblet, and the wine boiled into blood and ash. A servant refilling Vonara's glass, who was Pip Proudfoot, slipped her a note: _"The wine was a ruse. The true poison is in the air. Breathe shallowly."_ She cast _dispel magic_ on the dining table and felt a weave unravel. It had carried a gaseous form of the poison Midnight Tears, enchanted into the air, and her spell saved most of the guests. One servant had already been poisoned and died on the floor.[^s23] She and Glade turned at once on [[Jessamine]], believing her the poisoner, and Jessamine and her bodyguard teleported out of the hall.[^s23] At the close of the gala Vonara spoke briefly with Wakanga, who was deeply concerned that [[Lady Nyrule]] now held the Eye of Ubtao.[^s25]
+At the gala of the twenty-third Montclair intercepted her and mocked her presence and her dress. [[Ekene-Afa]] then touched his goblet, and the wine boiled into blood and ash. A servant refilling Vonara's glass, who was Pip Proudfoot, slipped her a note: _"The wine was a ruse. The true poison is in the air. Breathe shallowly."_ She cast _dispel magic_ on the dining table and felt a weave unravel. It had carried a gaseous form of the poison Midnight Tears, enchanted into the air, and her spell saved most of the guests. A few nobles and servants were poisoned and died before it was fully contained.[^s23] She and Glade turned at once on [[Jessamine]], believing her the poisoner, and Jessamine and her bodyguard teleported out of the hall.[^s23] At the close of the gala Vonara spoke briefly with Wakanga, who was deeply concerned that [[Lady Nyrule]] now held the Eye of Ubtao.[^s25]
 
 On the evening of the twenty-fourth she went with Vogal to the Grand Colosseum.[^s27] The next day, in his duel with Tharn, a tiger that appeared in the arena ignored Tharn and went for Vogal. Vonara cast _dispel magic_ on it, and it turned on Tharn, who crushed its skull.[^s27] That afternoon she, Vogal, Glade and [[Inete]] felt the tremor of a death, hurried to a warehouse and went down into the [[Maw Below]], where they found Taenae and Takhesis alive.[^s28] Vonara freed Jessamine and her fellow prisoners from their shackles.[^s29]
 
