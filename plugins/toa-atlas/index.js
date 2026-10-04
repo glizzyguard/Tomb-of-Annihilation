@@ -64,7 +64,7 @@ const CSS = `
   .page:has(.toa-atlas-home) .left.sidebar .page-title { margin: 0; font-size: 1.3rem; white-space: nowrap; }
   .page:has(.toa-atlas-home) .left.sidebar .explorer, .page:has(.toa-atlas-home) .left.sidebar .spacer { display: none; }
   .page:has(.toa-atlas-home) .left.sidebar .flex-component { flex: 0 1 28rem; margin: 0; }
-  .page:has(.toa-atlas-home) .center { max-width: none; padding: 0 1.2rem; }
+  .page:has(.toa-atlas-home) .center { max-width: none; width: 100%; box-sizing: border-box; padding: 0 1.2rem; }
   .page:has(.toa-atlas-home) .center article > *:not(:has(.toa-atlas-home)) { max-width: 60rem; }
   .toa-atlas-home { margin: 0 0 1.5rem; }
   .toa-atlas-home.toa-atlas-linked { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem); gap: 1rem; height: calc(100vh - 4.6rem); min-height: 28rem; }

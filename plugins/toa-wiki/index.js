@@ -68,6 +68,18 @@ const CSS = `
 #toa-lightbox img { max-width: 96vw; max-height: 96vh; object-fit: contain; margin: 0; border-radius: 4px; }
 `
 
+// The explorer reveals the current page's entry with scrollIntoView, which also scrolls the window when the
+// page is the scroller (the plain Quartz layout). "nearest" keeps the reveal inside the explorer list.
+const EXPLORER_SCROLL_JS = `
+(() => {
+  const orig = Element.prototype.scrollIntoView
+  Element.prototype.scrollIntoView = function (arg) {
+    if (this.closest && this.closest(".explorer")) return orig.call(this, { block: "nearest", inline: "nearest" })
+    return orig.call(this, arg)
+  }
+})()
+`
+
 const PORTRAIT_JS = `
 (function () {
   if (window.__toaPortraits) return;
@@ -469,7 +481,8 @@ export default function ToaWiki(userOpts) {
     },
     externalResources() {
       const res = { css: [{ content: CSS, inline: true }] }
-      if (opts.portraits) res.js = [{ script: PORTRAIT_JS, loadTime: "afterDOMReady", contentType: "inline", spaPreserve: true }]
+      res.js = [{ script: EXPLORER_SCROLL_JS, loadTime: "beforeDOMReady", contentType: "inline", spaPreserve: true }]
+      if (opts.portraits) res.js.push({ script: PORTRAIT_JS, loadTime: "afterDOMReady", contentType: "inline", spaPreserve: true })
       return res
     },
   }

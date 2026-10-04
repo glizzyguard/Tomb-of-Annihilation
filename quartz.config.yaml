@@ -130,7 +130,7 @@ plugins:
       body: EB Garamond
       fontOrigin: googleFonts
   - source: "@quartz-themes/core"
-    enabled: true
+    enabled: false   # ToA 2026-10-04: plain Quartz look, Patrick disliked the ITS theme colors
     options:
       theme: its-theme
       variation: ttrpg-dnd
