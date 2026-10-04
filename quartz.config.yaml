@@ -21,27 +21,27 @@ configuration:
       header: Cinzel          # ToA: also used for the generated link-preview images
       body: EB Garamond
       code: IBM Plex Mono
-    colors:
+    colors:                    # ToA 2026-10-04: parchment palette (Patrick's call), dark red accents
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#e5e5e5"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        light: "#f3ead3"       # page: parchment
+        lightgray: "#dfd1ae"   # borders, infobox header
+        gray: "#a39472"        # muted text
+        darkgray: "#3b3024"    # body text
+        dark: "#231a10"        # headings
+        secondary: "#7a1f1f"   # links, site title: dark red
+        tertiary: "#a8581f"    # hover
+        highlight: rgba(122, 31, 31, 0.08)
+        textHighlight: "#e8c96a88"
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        light: "#1b1712"       # page: warm near-black
+        lightgray: "#3a3126"
+        gray: "#84765f"
+        darkgray: "#ddd2ba"
+        dark: "#f1e7d0"
+        secondary: "#d9a05b"   # links: aged gold (dark red does not read on a dark page)
+        tertiary: "#c8733f"
+        highlight: rgba(217, 160, 91, 0.10)
+        textHighlight: "#b3900288"
 plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
@@ -291,7 +291,7 @@ plugins:
         - tags
         - aliases
       excludedProperties: []
-      hidePropertiesView: false
+      hidePropertiesView: true   # ToA 2026-10-04: the infobox already shows what matters; the panel sat above every article
       delimiters: ---
       language: yaml
     order: 5
