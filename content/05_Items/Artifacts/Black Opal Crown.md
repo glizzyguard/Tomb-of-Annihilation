@@ -4,8 +4,8 @@ aliases:
   - The Black Opal Crown
 description: Yuan-ti artifact said to wake Dendar the Night Serpent; left alone in the Tomb's maze, and last seen on Savriel Tirinath's brow.
 created: 2026-09-26T22:25:00.265Z
-modified: 2026-10-02T04:16:05.253Z
-published: 2026-10-02T04:16:05.253Z
+modified: 2026-10-04T21:58:01.686Z
+published: 2026-10-04T21:58:01.686Z
 tags:
   - type/item
   - type/artifact
@@ -21,7 +21,7 @@ found: "[[Session 79]]"
 
 # Black Opal Crown
 
-The **Black Opal Crown** was an ancient artifact tied to the yuan-ti, which the party found at the centre of the Maze of Death on the fourth level of the [[Tomb of the Nine Gods]] and left where it sat.[^s79][^s82] It was next seen on the brow of [[Savriel Tirinath]] in the [[The Cradle of the Death God|Cradle]], and it went with her when [[Dendar]] took her.[^s89][^s90]
+The **Black Opal Crown** was an ancient artifact tied to the Yuan-ti, which the party found at the center of the Maze of Death on the fourth level of the [[Tomb of the Nine Gods]] and left where it sat.[^s79][^s82] It was next seen on the brow of [[Savriel Tirinath]] in the [[The Cradle of the Death God|Cradle]], and it went with her when [[Dendar]] took her.[^s89][^s90]
 
 ## Powers
 
@@ -31,7 +31,7 @@ The party never handled the crown and knew its power only by report. [[Napaka]],
 
 ### In the maze
 
-At midday on the fifteenth of Eleasis, 1492 DR, the party went into the Maze of Death, reached its centre and saw the crown there. They chose to leave it completely alone, and whatever trap it sat on stayed unsprung.[^s79]
+At midday on the fifteenth of Eleasis, 1492 DR, the party went into the Maze of Death, reached its center and saw the crown there. They chose to leave it completely alone, and whatever trap it sat on stayed unsprung.[^s79]
 
 ### What Napaka said
 

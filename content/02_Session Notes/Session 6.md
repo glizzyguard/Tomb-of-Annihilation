@@ -2,7 +2,7 @@
 publish: true
 description: Separated from the others, Vogal and Vonara join Fenro Silver in defending the polymorphed wizard Finethir Shinebright from Master Noke, who dies when his wand backfires.
 created: 2024-09-19
-modified: 2026-10-04T21:23:11.341Z
+modified: 2026-10-04T21:58:01.667Z
 published: 2024-09-19
 tags:
   - session-note
@@ -57,7 +57,7 @@ The enemies are defeated and Finethir Shinebright is saved. The Wand of True Pol
 
 ### Present
 
-Active: [[Vogal]] · [[Vonara]] · [[Fenro Silver]], a guest player character. Absent, the party being split in character: [[Taenae]] · [[Takhesis Calva]] · [[Glade]] · [[Azaka Stormfang]], a companion.
+[[Vogal]] · [[Vonara]] · [[Fenro Silver]], a guest player character.
 
 ### References
 

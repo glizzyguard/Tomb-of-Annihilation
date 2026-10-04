@@ -2,8 +2,8 @@
 publish: true
 title: Architects of Balance
 created: 2026-10-02T02:21:10.245Z
-modified: 2026-10-02T02:21:10.245Z
-published: 2026-10-02T02:21:10.245Z
+modified: 2026-10-04T21:58:01.902Z
+published: 2026-10-04T21:58:01.902Z
 tags:
   - type/hub
   - campaign/toa
@@ -31,7 +31,7 @@ views:
 
 - [[The Party]]
 - [[Vogal]] · [[Inete]] · [[Glade]] · [[Vonara]] · [[Taenae]] · [[Raiketsu]]
-- [[Takhesis Calva (Wiki)|Takhesis Calva]] · [[Ersklan Ghostfang]]
+- [[Takhesis Calva]] · [[Ersklan Ghostfang]]
 
 ## The Story
 

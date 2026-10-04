@@ -2,7 +2,7 @@
 publish: true
 description: Zitembe confirms the Soulmonger is the cause of the Death Curse, Taenae offends Inete, and on the way to Firefinger the party loses its canoe, fights su-monsters and finds a dead beholder.
 created: 2024-09-12
-modified: 2026-10-04T21:23:11.336Z
+modified: 2026-10-04T21:58:01.659Z
 published: 2024-09-12
 tags:
   - session-note
@@ -62,7 +62,7 @@ The party discovers a dead beholder being eaten by vultures. Vonara scares the v
 
 ### Present
 
-[[Taenae]] · [[Vogal]] · [[Takhesis Calva]] · [[Vonara]] · [[Glade]]. [[Taban Veilthorn|Taban]] and [[Azaka Stormfang]] were present as companions. [[Inete]] was not; she had returned to her place in the [[Temple of Savras]].
+[[Taenae]] · [[Vogal]] · [[Takhesis Calva]] · [[Vonara]] · [[Glade]]. [[Taban Veilthorn|Taban]] and [[Azaka Stormfang]] were present as companions.
 
 ### References
 

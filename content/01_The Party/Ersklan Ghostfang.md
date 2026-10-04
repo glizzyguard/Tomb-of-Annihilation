@@ -3,8 +3,8 @@ publish: true
 aliases:
   - Fang
 created: 2026-07-22T01:13:54.002Z
-modified: 2026-09-30T23:12:44.403Z
-published: 2026-09-30T23:12:44.403Z
+modified: 2026-10-04T21:58:01.636Z
+published: 2026-10-04T21:58:01.636Z
 tags:
   - pc-note
   - character/fang
@@ -28,14 +28,14 @@ last_seen: "[[Session 75]]"
 
 # Ersklan Ghostfang
 
-**Ersklan Ghostfang**, called Fang, was a human rogue who broke free of the [[Mirror of Life Trapping]] in the [[Tomb of the Nine Gods]] and joined the party on the second level so that he could go back down for the companion he called the Paladin, [[Savriel Tirinath]].[^s71] He died before that day was out, in the maze of Unkh's tomb on the fourth level, the first of the party to be killed in the Tomb.[^s75]
+**Ersklan Ghostfang**, called Fang, was a Human rogue who broke free of the [[Mirror of Life Trapping]] in the [[Tomb of the Nine Gods]] and joined the party on the second level so that he could go back down for the companion he called the Paladin, [[Savriel Tirinath]].[^s71] He died before that day was out, in the maze of Unkh's tomb on the fourth level, the first of the party to be killed in the Tomb.[^s75]
 
 > [!quote] Fang, on the Grand Staircase
 > _"Don't let them collar you! They drag you away, you don't come back!"_[^s70]
 
 ## Description
 
-Fang stood five feet seven inches, a human of average build, and wore the hooded, practical clothing of a rogue.[^s71] When the party first saw him he was haggard and bleeding, and his clothes glittered with crushed silver glass.[^s70]
+Fang stood five feet seven inches, a Human of average build, and wore the hooded, practical clothing of a rogue.[^s71] When the party first saw him he was haggard and bleeding, and his clothes glittered with crushed silver glass.[^s70]
 
 ## Personality
 
@@ -65,15 +65,15 @@ Nothing is known of Fang's life before the Tomb. He told the party only that he 
 
 ### On the Grand Staircase
 
-On the morning of the fourteenth of Eleasis, the eighty-second day of the expedition, Fang arrived on the second level as [[Takhesis Calva]] left it. He was hurled backward through the archway onto the frost-covered steps of the Grand Staircase, bleeding and glittering with glass, and spat out a warning about the [[Tomb Dwarves]] and their mancatchers as the ambush closed.[^s70] He fought beside the party against the dwarves and the tomb guardian that [[Withers]] had set on them, introduced himself when the fight was over, and joined them.[^s71]
+On the morning of the fourteenth of Eleasis, the eighty-second day of the expedition, Fang arrived on the second level as [[Takhesis Calva]] left it. He was hurled backward through the archway onto the frost-covered steps of the Grand Staircase, bleeding and glittering with glass, and spat out a warning about the [[Tomb Dwarves]] and their mancatchers as the ambush closed.[^s70] He fought beside the party against the Dwarves and the tomb guardian that [[Withers]] had set on them, introduced himself when the fight was over, and joined them.[^s71]
 
 ### The third and fourth levels
 
-That afternoon, in the Vault of Reflection, two tomb guardians ambushed the party and beat Fang to the floor before the others destroyed them. He was stabilised, and the party caught its breath.[^s73] At the rite for Kubazan he offered his maggots.[^s74] In the Veils of Fear, Taenae failed to resist the Lord of the Feast and put her head between its jaws; the head bit down, and Fang smashed it before it could finish.[^s74] The party then took the spiral stair down to the fourth level.[^s74]
+That afternoon, in the Vault of Reflection, two tomb guardians ambushed the party and beat Fang to the floor before the others destroyed them. He was stabilized, and the party caught its breath.[^s73] At the rite for Kubazan he offered his maggots.[^s74] In the Veils of Fear, Taenae failed to resist the Lord of the Feast and put her head between its jaws; the head bit down, and Fang smashed it before it could finish.[^s74] The party then took the spiral stair down to the fourth level.[^s74]
 
 ### Unkh's tomb
 
-That evening, beyond the throne room and the blood door, the party entered the tomb of [[Unkh]], where a shifting maze held coloured keys for a colour-changing sarcophagus.[^s75] They split up to search it, and ten minotaur skeletons charged, some into the maze and some at those left outside. Glade brought back the green key; Fang, after the party had lost a long stretch of time in the wrong corridors, brought back the gold. Glade then pushed the green key into the sarcophagus while it glowed purple, and the key vanished back into the maze.
+That evening, beyond the throne room and the blood door, the party entered the tomb of [[Unkh]], where a shifting maze held colored keys for a color-changing sarcophagus.[^s75] They split up to search it, and ten minotaur skeletons charged, some into the maze and some at those left outside. Glade brought back the green key; Fang, after the party had lost a long stretch of time in the wrong corridors, brought back the gold. Glade then pushed the green key into the sarcophagus while it glowed purple, and the key vanished back into the maze.
 
 With the puzzle reset and the party scattered, Fang was cut off. He was beaten down twice and healed each time by Vonara and Glade, and the third time the bone axes finished him.[^s75]
 
